@@ -41,7 +41,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	normal_distribution<double> d_theta(theta,std[2]);
 
 	// initialize the particles' values
-	for( auto p : particles){
+	for( auto &p : particles){
 		p.x = d_x(gen);
 		p.y = d_y(gen);
 		p.theta = d_theta(gen);
@@ -63,7 +63,7 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	normal_distribution<double> d_y(0,std_pos[1]);
 	normal_distribution<double> d_theta(0,std_pos[2]);
 
-	for(auto p:particles){
+	for(auto &p:particles){
 		if(yaw_rate < 0.0001){
 			p.x += velocity * cos(p.theta) * delta_t;
 			p.y += velocity * sin(p.theta) * delta_t;
